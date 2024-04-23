@@ -1,0 +1,51 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell", // 定义任务类型为 shell，用于运行 shell 命令
+            "label": "build", // 任务的标签
+            "command": "make", // 使用 make 命令
+            "args": [
+                "-j16"
+            ], // 传递参数给 make
+            "group": {
+                "kind": "build", // 将任务分组为构建任务
+                "isDefault": false // 是否默认构建任务
+            },
+            "presentation": {
+                "reveal": "always", // 构建任务完成后总是显示输出面板
+                // "panel": "new" // 在新面板中显示输出
+            },
+            "options": {
+                "cwd": "${workspaceFolder}" // 设置工作目录为项目根目录
+            },
+            "problemMatcher": [
+                "$gcc" // 使用 gcc 错误匹配器来捕获编译错误
+            ]
+        },
+        {
+            "type": "shell", // 定义任务类型为 shell，用于运行 shell 命令
+            "label": "debug", // 任务的标签
+            "command": "build/app.exe",
+            "args": [
+               
+            ], // 传递参数给 make
+            "group": {
+                "kind": "build", // 将任务分组为构建任务
+                "isDefault": true // 将任务设置为默认构建任务
+            },
+            "presentation": {
+                "reveal": "always", // 构建任务完成后总是显示输出面板
+                // "panel": "new" // 在新面板中显示输出
+            },
+            "options": {
+                "cwd": "${workspaceFolder}" // 设置工作目录为项目根目录
+            },
+            "dependsOrder": "sequence", //sequence按顺序运行dependsOn中的任务 parallel并行运行dependsOn中的任务
+            "dependsOn": ["build"],
+            "problemMatcher": [
+                "$gcc" // 使用 gcc 错误匹配器来捕获编译错误
+            ]
+        }
+    ]
+}

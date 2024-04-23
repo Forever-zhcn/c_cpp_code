@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug", // 配置的名称
+            "type": "cppdbg", // 指定调试器类型为 C/C++ 调试器
+            "request": "launch", // 启动调试器的请求类型
+            "program": "${workspaceFolder}/build/app.exe", // 调试的可执行文件路径
+            "args": [], // 不传递额外的参数给可执行文件
+            "stopAtEntry": false, // 不在程序入口处停止
+            "cwd": "${workspaceFolder}", // 设置工作目录为项目根目录
+            "environment": [], // 设置环境变量
+            "externalConsole": false, // 在 VSCode 中显示控制台而不是外部控制台
+            "MIMode": "gdb", // 使用 GDB 调试器
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": false
+                }
+            ],
+            "preLaunchTask": "build" // 在启动调试器之前运行的构建任务
+        }
+    ]
+}

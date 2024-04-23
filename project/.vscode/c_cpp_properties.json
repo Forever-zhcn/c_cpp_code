@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Debug Configuration",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/**/**",
+                "${workspaceFolder}/**/**/**",
+                "${workspaceFolder}/**/**/**/**",
+                "${workspaceFolder}/**/**/**/**/**",
+                "${workspaceFolder}/**/**/**/**/**/**",
+                "${workspaceFolder}/**/**/**/**/**/**/**",
+                "${workspaceFolder}/**/**/**/**/**/**/**/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "F:/DevelopmentToolsPath/mingw64/bin/gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

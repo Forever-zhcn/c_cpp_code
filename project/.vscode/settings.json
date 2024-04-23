@@ -1,0 +1,29 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    },
+    "hide-files.files": [],
+    "terminal.integrated.shellArgs.windows": ["-ExecutionPolicy", "RemoteSigned", "-NoLogo", "-NoProfile", "-Command", "chcp 65001", "$env:Path += ';<path-to-your-gcc>'"],
+    "terminal.integrated.shellArgs.linux": ["-c", "chcp 65001"],
+    "terminal.integrated.shellArgs.osx": ["-c", "chcp 65001"],
+    "terminal.integrated.encoding": "utf-8",
+    "files.autoGuessEncoding": false,
+    "files.encoding": "utf8",
+    "terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontWeight": "normal",
+    "editor.mouseWheelZoom": true,
+    "files.associations": {
+        "hello.h": "c",
+        "random": "c",
+        "stdlib_noniso.h": "c",
+        "cjsontest.h": "c",
+        "cjson.h": "c",
+        "stdlib.h": "c"
+    },
+}
