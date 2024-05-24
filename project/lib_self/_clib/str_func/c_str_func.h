@@ -1,9 +1,17 @@
-#ifndef __MYSTR_H_
-#define __MYSTR_H_
+#ifndef __C_STR_FUNC_H_
+#define __C_STR_FUNC_H_
+
 
 #ifdef __cplusplus
 extern "C"{
 #endif
+
+#include <stdbool.h>
+#include <stddef.h>
+
+void remove_char_inplace(char *str, char c);
+
+char* remove_char_dynamic(const char *str, char c);
 
 char* split_string(const char* str, const char* fen, int index);
 char* str_substr(char* str, const char* substr);
@@ -15,6 +23,6 @@ void mystr_test();
 }
 #endif
 
-
 #endif
+
 

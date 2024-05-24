@@ -6,11 +6,10 @@ extern "C"{
 #endif
 
 void cJSONTest();
-int cJSONTest1();
+void cJSON_test();
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

@@ -177,9 +177,9 @@ void printJson(cJSON * root)//以递归的方式打印json的最内层键值对
 }
 
 
-void cJSONTest1()
+static void analy_wifi()
 {
-	const char *json_data = "{\"wifiname\":\"aaa\",\"password\":\"12345678\"}";
+    const char *json_data = "{\"wifiname\":\"aaa\",\"password\":\"12345678\"}";
 
 	cJSON *cjson_data;
 	cJSON *wifiname;
@@ -219,3 +219,145 @@ void cJSONTest1()
 	printf("wifi_pass:%s\n", wifi_pass);
 }
 
+
+
+static int analy_value()
+{
+    // JSON 字符串
+    const char *json_str = "{\"deviceType\":\"CustomCategory\",\"iotId\":\"2XrfXZh74DQDJPeMh3TA000000\",\"requestId\":\"null\",\"checkFailedData\":{},\"productKey\":\"a1vF4yG4xrh\",\"gmtCreate\":1713793968179,\"deviceName\":\"app_dev_111111\",\"items\":{\"LED1\":{\"time\":1713793968174,\"value\":1}}}";
+
+    // 解析 JSON 字符串
+    cJSON *root = cJSON_Parse(json_str);
+    if (root == NULL) {
+        printf("Error before: [%s]\n", cJSON_GetErrorPtr());
+        return 1;
+    }
+
+    // 获取 items 字段的 cJSON 对象
+    cJSON *items = cJSON_GetObjectItemCaseSensitive(root, "items");
+    if (items == NULL) {
+        printf("Error: items not found\n");
+        cJSON_Delete(root);
+        return 1;
+    }
+
+    // 获取 LED1 字段的 cJSON 对象
+    cJSON *LED1 = cJSON_GetObjectItemCaseSensitive(items, "LED1");
+    if (LED1 == NULL) {
+        printf("Error: LED1 not found\n");
+        cJSON_Delete(root);
+        return 1;
+    }
+    char *LED1_str = cJSON_Print(LED1);
+    printf("LED1_str: %s\n", LED1_str);
+
+    // 获取 value 字段的 cJSON 对象
+    cJSON *value = cJSON_GetObjectItemCaseSensitive(LED1, "value");
+    if (value == NULL) {
+        printf("Error: value not found\n");
+        cJSON_Delete(root);
+        return 1;
+    }
+
+    char *value_str = cJSON_Print(value);
+    printf("value_str: %s\n", value_str);
+
+    // 判断 value 的类型并打印相应信息
+    if (cJSON_IsString(value)) {
+        printf("value is a string: %s\n", value->valuestring);
+    } else if (cJSON_IsNumber(value)) {
+        printf("value is a number\n");
+        if (value->valuedouble == value->valueint) {
+            printf("value is an integer: %d\n", value->valueint);
+        } else {
+            printf("value is a floating-point number: %f\n", value->valuedouble);
+        }
+    } else if (cJSON_IsBool(value)) {
+        printf("value is a boolean: %s\n", cJSON_IsTrue(value) ? "true" : "false");
+    } else if (cJSON_IsNull(value)) {
+        printf("value is null\n");
+    } else {
+        printf("value is of unknown type\n");
+    }
+
+    // 获取 value 字段的值
+    int value_int = cJSON_GetNumberValue(value);
+    printf("LED1 value: %d\n", value_int);
+
+    // 释放 cJSON 对象
+    cJSON_Delete(root);
+
+    return 0;
+}
+
+
+static void creat_json_demo()
+{
+    typedef __UINT8_TYPE__ __uint8_t;
+    typedef __uint8_t uint8_t ;
+    uint8_t Temp_Value = 28;
+    uint8_t Temp_point_Value = 8;
+    uint8_t Humi_Value = 28;
+    uint8_t Humi_point_Value = 8;
+    uint8_t led1_state = 1;
+
+
+    // 创建根节点
+    cJSON *root = cJSON_CreateObject();
+    if (root == NULL) {
+        printf("Error creating root object\n");
+        return ;
+    }
+    // 创建 params 子节点
+    cJSON *params = cJSON_CreateObject();
+    if (params == NULL) {
+        printf("Error creating params object\n");
+        cJSON_Delete(root);
+        return ;
+    }
+    // 将 params 节点添加到根节点
+    cJSON_AddItemToObject(root, "params", params);
+
+    // 添加 temp 字段到 params 节点
+    cJSON_AddNumberToObject(params, "temp", Temp_Value + (float)Temp_point_Value / 10.0);
+
+    // 添加 humi 字段到 params 节点
+    cJSON_AddNumberToObject(params, "humi", Humi_Value + (float)Humi_point_Value / 10.0);
+
+    // 添加 LED1 字段到 params 节点
+    cJSON_AddNumberToObject(params, "LED1", !led1_state);
+
+    
+
+    // 将 cJSON 对象转换为字符串
+    // char *jsonString = cJSON_Print(root);            // 创建出的json为带换行的格式
+    char *jsonString = cJSON_PrintUnformatted(root);    // 创建出的json为不带换行的格式
+    if (jsonString == NULL) {
+        printf("Error converting cJSON to string\n");
+        cJSON_Delete(root);
+        return ;
+    }
+
+    printf("jsonString:%s\r\n", jsonString);
+
+    // char Pub_Buffer[256];
+    // // 将 JSON 字符串复制到 Pub_Buffer 中
+    // strcpy(Pub_Buffer, jsonString);
+
+    // 释放 cJSON 对象和 JSON 字符串
+    cJSON_Delete(root);
+    free(jsonString);
+
+    
+}
+
+void cJSON_test()
+{
+    // analy_wifi();
+
+    // analy_value();
+
+    creat_json_demo();
+
+
+}

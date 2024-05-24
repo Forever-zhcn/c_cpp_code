@@ -1,9 +1,47 @@
-#include <stdio.h>
+#include "c_str_func.h"
+
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <stdio.h>
 
-#include "mystr.h"
+/// @brief 在原来的字符串中去掉指定字符
+/// @param str 
+/// @param c 
+void remove_char_inplace(char *str, char c) {
+    char *src, *dst;
+    for (src = dst = str; *src != '\0'; src++) {
+        *dst = *src;
+        if (*dst != c)
+            dst++;
+    }
+    *dst = '\0';
+}
+
+
+/// @brief 去掉str中指定字符并返回新的数据，请释放内存
+/// @param str 
+/// @param c 
+/// @return (char*) result
+char* remove_char_dynamic(const char *str, char c) {
+    int len = strlen(str);
+    char *result = (char*)malloc(len + 1);      // 分配内存以存储结果字符串，加上终止符'\0'
+    if (result == NULL) {
+        printf("Memory allocation failed.\n");
+        exit(1);
+    }
+
+    int i, j = 0;
+    for (i = 0; i < len; i++) {
+        if (str[i] != c) {
+            result[j++] = str[i];
+        }
+    }
+    result[j] = '\0';                           // 添加字符串终止符
+
+    return result;
+}
+
+
 
 char aa[64];
 
@@ -147,3 +185,4 @@ void mystr_test()
     printf("DEVICE_SECRET:%s\r\n", DEVICE_SECRET);
 
 }
+

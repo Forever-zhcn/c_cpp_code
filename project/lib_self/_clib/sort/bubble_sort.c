@@ -1,8 +1,6 @@
 #include "bubble_sort.h"
 
-
-#include<iostream>
-// using namespace std;
+#include <stdio.h>
 
 #define _CRT_SECURE_NO_WARNINGS 1
 
@@ -15,12 +13,12 @@ static int arr_len = sizeof(arr) / sizeof(arr[0]);
 void bubble_test(void)
 {
     // 输出数组原始内容
-    std::cout << "Original array" << std::endl;
+    printf("Original array\r\n");
     for (int i = 0; i < arr_len; i++)
     {
-        std::cout << arr[i] << " ";
+        printf("%d ", arr[i]);
     }
-    std::cout << std::endl;
+    printf("\r\n");
 
     // 冒泡排序
     for (int i = 0; i < arr_len - 1; i++)
@@ -37,11 +35,11 @@ void bubble_test(void)
     }
 
     // 输出排序后的数组内容
-    std::cout << "Sorted array:" << std::endl;
+    printf("Sorted array: \r\n");
     for (int i = 0; i < arr_len; i++)
     {
-        std::cout << arr[i] << " ";
+        printf("%d", arr[i]);
     }
-    std::cout << std::endl;
+    printf("\r\n");
 
 }
